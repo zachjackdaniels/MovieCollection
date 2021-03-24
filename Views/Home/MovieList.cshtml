@@ -1,0 +1,94 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "The Joel Hilton Film Collection";
+}
+
+@model IEnumerable<MovieCollection.Models.Movie>
+
+<div class="container">
+    <div class="row">
+        <div>
+            <a asp-action="AddMovie" class="btn btn-success">Create New</a>
+        </div>
+    </div>
+    <hr />
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Year)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Director)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Rating)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Edited)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.LentTo)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Notes)
+                </th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Where(n => n.Title != "Independence Day"))
+            {
+                <tr>
+                    <td scope="row">
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Year)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Director)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rating)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Edited)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LentTo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Notes)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.MovieId" class="btn btn-primary">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <form method="post" asp-action="Delete" asp-route-id="@item.MovieId">
+                            <button class="btn btn-danger">
+
+                                <i class="fas fa-trash">
+                                </i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
